@@ -19,10 +19,7 @@ const Login = () => {
                 username: values.username,
                 password: values.password,
             };
-
-
             console.log(payload, "payload");
-
             const response = await fetch('https://dummyjson.com/auth/login', {
                 method: 'POST',
                 headers: {
@@ -44,14 +41,12 @@ const Login = () => {
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('username', values.username);
                 localStorage.setItem('password', values.password);
-
                 navigate("/");
             } else {
                 alert('Login Failed: ' + (data.message));
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred.');
         } finally {
             setSubmit(false);
         }

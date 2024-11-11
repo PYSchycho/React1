@@ -6,8 +6,8 @@ const PrivateRoute = ({ Component }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   useEffect(() => {
-    const token =localStorage.getItem('token');
-    if (token) {
+    const accessToken =localStorage.getItem('accessToken');
+    if (accessToken) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);

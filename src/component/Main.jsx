@@ -12,7 +12,7 @@ const Main = () => {
     <Router>
     <Navbar />
       <Routes>
-        <Route path="/" element={<PrivateRoute Component={Home}/>} />
+        <Route path="/" index element={<PrivateRoute Component={Home}/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/about" element={<PrivateRoute Component={About}/>} />
       </Routes>
