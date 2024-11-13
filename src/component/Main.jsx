@@ -5,8 +5,6 @@ import Home from './Home';
 import Login from './Login';
 import About from './About';
 import Navbar from './Navbar';
-
-
 const Main = () => {
   return(
     <Router>
@@ -19,5 +17,4 @@ const Main = () => {
     </Router>
   );
 };
-
 export default Main;
