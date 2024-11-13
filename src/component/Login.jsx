@@ -1,18 +1,15 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
-
 const Login = () => {
     const navigate = useNavigate();
     const [showpassword, setShowPassword] = useState(false);
-
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
             navigate("/");
         }
     }, [navigate]);
-
     const handleLogin = async (values, { setSubmit }) => {
         try {
             const payload = {
@@ -33,10 +30,8 @@ const Login = () => {
                 alert('Login Failed: ' + (data.message || 'Unknown error'));
                 return;
             }
-
             const data = await response.json();
             console.log(data, 'Login Success');
-
             if (data.accessToken) {
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('username', values.username);
@@ -51,14 +46,12 @@ const Login = () => {
             setSubmit(false);
         }
     };
-
     return (
         <div className="flex flex-col items-center p-4">
             <h2 className="text-2xl font-bold mb-4">Login Page</h2>
             <Formik
                 initialValues={{ username: '', password: '' }}
-                onSubmit={handleLogin}
-            >
+                onSubmit={handleLogin} >
                 {({ handleSubmit, isSubmitting }) => (
                     <Form className="w-full max-w-sm" onSubmit={handleSubmit}>
                         <div className="mb-4">
@@ -67,11 +60,7 @@ const Login = () => {
                                 type="username"
                                 id="username"
                                 name="username"
-                                className="w-full p-2 border border-gray-300 rounded"
-
-                            />
-
-
+                                className="w-full p-2 border border-gray-300 rounded"/>
                         </div>
                         <div className="mb-4">
                             <label htmlFor="password">Password:</label>
@@ -79,8 +68,7 @@ const Login = () => {
                                 type={showpassword ? "text" : "password"}
                                 id="password"
                                 name="password"
-                                className="w-full p-2 border border-gray-300 rounded"
-                            />
+                                className="w-full p-2 border border-gray-300 rounded />
                             <div className="mt-2">
                                 <label htmlFor="show-password" className="inline-flex items-center">
                                     <input
@@ -88,26 +76,20 @@ const Login = () => {
                                         type="checkbox"
                                         checked={showpassword}
                                         onChange={() => setShowPassword((prev) => !prev)}
-                                        className="mr-2"
-                                    />
+                                        className="mr-2" />
                                     Show Password
                                 </label>
                             </div>
-
-                        </div>
+                    </div>
                         <button
                             className="w-full p-2 bg-black text-white font-bold my-12"
                             type="submit"
-                            disabled={isSubmitting}
-
-                        >
+                            disabled={isSubmitting} >
                             Submit
-                        </button>
-                    </Form>
+            </button>
+        </Form>
                 )}
             </Formik>
         </div>
-    );
-};
-
+    )};
 export default Login;
