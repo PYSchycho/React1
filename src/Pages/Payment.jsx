@@ -13,8 +13,7 @@ const Payment = () => {
     paymentMethod:''
   };
   const navigate = useNavigate()
-  const onSubmit=(value) =>{
-    console.log("form :", value)
+  const onSubmit=() =>{
     navigate("/payments-success");
     localStorage.removeItem('cart')
 
@@ -65,5 +64,4 @@ const Payment = () => {
     </div>
   );
 }
-
 export default Payment;
