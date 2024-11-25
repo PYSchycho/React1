@@ -14,7 +14,7 @@ const Cart = () => {
             try {
                 setCart(JSON.parse(storedCart));
             } catch (error) {
-                console.error("Erooooorrrrrr", error);
+                console.error("Errors", error);
                 setCart([]);
             }
         } else {
@@ -141,9 +141,6 @@ const Cart = () => {
                 </div>
 
             </div>
-           
-                
-
             </div>
     );
 }

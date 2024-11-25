@@ -10,7 +10,7 @@ const Home = () => {
         try {
             setCart(JSON.parse(storedCart));
         } catch (error) {
-            console.error("Erooooorrrrrr", error);
+            console.error("Errors", error);
             setCart([]); 
         }
     } else {
@@ -34,7 +34,7 @@ const Home = () => {
         setProducts(data);
         setLoading(false);
       } catch (error) {
-        console.log(error, "Errorrrrrrrrrr");
+        console.log(error, "Error");
       }
       finally {
         setLoading(false)
