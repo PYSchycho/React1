@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Navbar from '../component/Navbar';
@@ -27,9 +27,31 @@ const Address = () => {
       .matches(/^\d{10}$/, 'Phone Number must be 10 digits')
       .required('Phone Number is required'),
   });
-  const onSubmit = () => {
+  const onSubmit = (values, { resetForm }) => {
+    console.log('Form data:', values);
     navigate("/payment")
+    localStorage.setItem('addressFormData', JSON.stringify(values));
+    resetForm();
   };
+  const handleTextChange = (e, setFieldValue) => {
+    const { name, value } = e.target;
+    const cleanedValue = value.replace(/[^A-Za-z\s]/g, '');
+    setFieldValue(name, cleanedValue);
+  };
+  const handlePhoneNumberChange = (e, setFieldValue) => {
+    const { name, value } = e.target;
+    const cleanedValue = value.replace(/\D/g, '');
+    if (cleanedValue.length <= 10) {
+      setFieldValue(name, cleanedValue);
+    }
+  };
+  useEffect(() => {
+    const storedData = localStorage.getItem('address');
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      console.log('stored Address:', parsedData);
+    }
+  }, []);
   return (
     <>
       <Navbar />
@@ -48,6 +70,7 @@ const Address = () => {
                   id="name"
                   name="name"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  onChange={(e) => handleTextChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
               </div>
@@ -68,6 +91,7 @@ const Address = () => {
                   id="city"
                   name="city"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  onChange={(e) => handleTextChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="city" component="div" className="text-red-500 text-sm" />
               </div>
@@ -78,6 +102,7 @@ const Address = () => {
                   id="state"
                   name="state"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  onChange={(e) => handleTextChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="state" component="div" className="text-red-500 text-sm" />
               </div>
@@ -88,6 +113,7 @@ const Address = () => {
                   id="PhoneNumber"
                   name="PhoneNumber"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  onChange={(e) => handlePhoneNumberChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="PhoneNumber" component="div" className="text-red-500 text-sm" />
               </div>

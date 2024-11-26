@@ -18,9 +18,11 @@ const Login = () => {
                 body: JSON.stringify(payload),
             });
             if (!response.ok) {
+                console.log("Errors");
                 return;
             }
             const data = await response.json();
+            console.log(data, 'Login Success');
             if (data.accessToken) {
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('username', values.username);
