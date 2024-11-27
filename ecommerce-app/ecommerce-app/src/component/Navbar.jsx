@@ -14,7 +14,7 @@ const Navbar = () => {
             <div>
                 <nav className='flex p-3 h-16 max-w-screen-2xl max-h-screen bg-gray-950 text-white font-bold justify-between'>
                     <div className=' flex px-4' >
-                        <img className='size-12' src="./logo.png" alt="loading" />
+                        <img className='size-12' src="./logo1.jpg" alt="loading" />
                     </div>
                     <div className='hidden md:flex items-center space-x-6 px-6'>
                         <ul className=' px-4 py-2 hover:border-2 rounded-lg'>
