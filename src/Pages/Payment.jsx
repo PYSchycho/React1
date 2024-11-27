@@ -7,17 +7,14 @@ import { faPaypal } from '@fortawesome/free-brands-svg-icons/faPaypal';
 import { faGooglePay } from '@fortawesome/free-brands-svg-icons';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-
 const Payment = () => {
   const initialValues ={
     paymentMethod:''
   };
   const navigate = useNavigate()
-  const onSubmit=(value) =>{
-    console.log("form :", value)
+  const onSubmit=() =>{
     navigate("/payments-success");
     localStorage.removeItem('cart')
-
   }
   const validationSchema = yup.object({
     paymentMethod: yup.string().required('Choose any one Method of Payment')
@@ -30,11 +27,10 @@ const Payment = () => {
         <Formik
         initialValues={initialValues} 
         validationSchema={validationSchema}
-        onSubmit={onSubmit}
-        >
+        onSubmit={onSubmit}>
           <Form className='space-y-4'>
             <div>
-              <label htmlFor='paymentMethod' className='block text-lg font-bold text-gray-900 font-serif text-center'>Choose Payment Option</label>
+              <label className='block text-lg font-bold text-gray-900 font-serif text-center'>Choose Payment Option</label>
               <div className='mt-2 space-y-2 w-60 border-2 border-black bg-blue-200 items-center '>
                 <label className='flex items-center text-center p-2'>
                   <Field  type='radio' name="paymentMethod" value="creditcard" className='mr-2'/>
@@ -55,7 +51,7 @@ const Payment = () => {
               <ErrorMessage name="paymentMethod" component="div" className='text-red-500 text-sm' />
             </div>
             <div>
-              <button type='submit'  className='border border-white rounded-lg text-center items-center'>
+              <button type='submit'  className='border-2 border-white rounded-md px-5 text-xl text-center items-center'>
               Submit
               </button>
             </div>
@@ -65,5 +61,4 @@ const Payment = () => {
     </div>
   );
 }
-
 export default Payment;

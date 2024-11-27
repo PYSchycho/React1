@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Navbar from '../component/Navbar';
@@ -27,31 +27,10 @@ const Address = () => {
       .matches(/^\d{10}$/, 'Phone Number must be 10 digits')
       .required('Phone Number is required'),
   });
-  const onSubmit = (values, { resetForm }) => {
-    console.log('Form data:', values);
+  const onSubmit = (values) => {
     navigate("/payment")
     localStorage.setItem('addressFormData', JSON.stringify(values));
-    resetForm();
   };
-  const handleTextChange = (e, setFieldValue) => {
-    const { name, value } = e.target;
-    const cleanedValue = value.replace(/[^A-Za-z\s]/g, '');
-    setFieldValue(name, cleanedValue);
-  };
-  const handlePhoneNumberChange = (e, setFieldValue) => {
-    const { name, value } = e.target;
-    const cleanedValue = value.replace(/\D/g, '');
-    if (cleanedValue.length <= 10) {
-      setFieldValue(name, cleanedValue);
-    }
-  };
-  useEffect(() => {
-    const storedData = localStorage.getItem('address');
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      console.log('stored Address:', parsedData);
-    }
-  }, []);
   return (
     <>
       <Navbar />
@@ -61,59 +40,49 @@ const Address = () => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}>
-          {({setFieldValue}) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <label className="block text-sm font-medium text-gray-700">Name</label>
                 <Field
                   type="text"
-                  id="name"
                   name="name"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  onChange={(e) => handleTextChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
-                <label htmlFor="street" className="block text-sm font-medium text-gray-700">Street Address</label>
+                <label className="block text-sm font-medium text-gray-700">Street Address</label>
                 <Field
                   type="text"
-                  id="street"
                   name="street"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                 />
                 <ErrorMessage name="street" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+                <label className="block text-sm font-medium text-gray-700">City</label>
                 <Field
                   type="text"
-                  id="city"
                   name="city"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  onChange={(e) => handleTextChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="city" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
-                <label htmlFor="state" className="block text-sm font-medium text-gray-700">State</label>
+                <label className="block text-sm font-medium text-gray-700">State</label>
                 <Field
                   type="text"
-                  id="state"
                   name="state"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  onChange={(e) => handleTextChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="state" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
-                <label htmlFor="PhoneNumber" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                <label className="block text-sm font-medium text-gray-700">Phone Number</label>
                 <Field
                   type="text"
-                  id="PhoneNumber"
                   name="PhoneNumber"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  onChange={(e) => handlePhoneNumberChange(e, setFieldValue)}
                 />
                 <ErrorMessage name="PhoneNumber" component="div" className="text-red-500 text-sm" />
               </div>
@@ -122,7 +91,6 @@ const Address = () => {
               </button>
               </div>
             </Form>
-          )}
         </Formik>
       </div>
     </>

@@ -24,32 +24,28 @@ const Categories = () => {
                             <li>
                                 <Link
                                     to="/jewellery"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                >
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Jewellery
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     to="/electronics"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                >
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Electronics
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     to="/mens"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                >
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Men's Clothing
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     to="/womens"
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                >
+                                    className="block px-4 py-2  text-sm text-gray-700 hover:bg-gray-100">
                                     Women's Clothing
                                 </Link>
                             </li>

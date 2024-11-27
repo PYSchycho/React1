@@ -24,11 +24,10 @@ const Main = () => {
         v7_partialHydration: true,
         v7_relativeSplatPath: true,
         v7_skipActionErrorRevalidation: true,
-      }}
-    >
+      }}>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/payments-success" element={<PrivateRoute Component={PaymentsSuccess} />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/payments-success" element={<PrivateRoute Component={PaymentsSuccess} />} />
         <Route index path="/" element={<PrivateRoute Component={Home} />} />
         <Route path="/about" element={<PrivateRoute Component={About} />} />
         <Route path="/categories" element={<PrivateRoute Component={categories} />} />
@@ -40,7 +39,6 @@ const Main = () => {
         <Route path="/womens" element={<PrivateRoute Component={WomensClothingPage}/>}/>
         <Route path="/cart" element={<PrivateRoute Component={cart} />} />
         <Route path="/logout" element={<PrivateRoute Component={Logout} />} />
-
       </Routes>
     </BrowserRouter>
   )

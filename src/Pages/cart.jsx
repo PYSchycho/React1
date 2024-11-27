@@ -139,7 +139,6 @@ const Cart = () => {
                 Add your Address here <FontAwesomeIcon icon={faHouseUser} className='text-red-950'/>
                 </Link>
                 </div>
-
             </div>
             </div>
     );

@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <>
             <div>
-                <nav className='flex p-3 h-16 bg-gray-950 text-white font-bold justify-between'>
+                <nav className='flex p-3 h-16 max-w-screen-2xl max-h-screen bg-gray-950 text-white font-bold justify-between'>
                     <div className=' flex px-4' >
                         <img className='size-12' src="./logo.png" alt="loading" />
                     </div>
