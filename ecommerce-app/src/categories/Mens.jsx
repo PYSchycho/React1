@@ -4,6 +4,8 @@ const MensClothing = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [cart, setCart] = useState([]);
+    const [search, setSearch] = useState('')
+    const [sort, setSort] = useState('asc')
     useEffect(() => {
         const fetchMens = async () => {
             try {
@@ -15,12 +17,11 @@ const MensClothing = () => {
                     },
                 });
                 if (!response.ok) {
-                    throw new Error('Failed to fetch Mens products');
+                    throw Error('Failed to fetch Mens products');
                 }
                 const data = await response.json();
                 setProducts(data);
             } catch (error) {
-                console.log(error, "Error while fetching Mens products");
             } finally {
                 setLoading(false);
             }
@@ -38,12 +39,48 @@ const MensClothing = () => {
         setCart(newCart);
         localStorage.setItem('cart', JSON.stringify(newCart));
     };
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+    }
+    const handleSort = (e) => {
+        setSort(e.target.value)
+    }
+    const filterProducts = products.filter(product =>
+        product.title.toLowerCase().includes(search.toLowerCase())
+    )
+        .sort((a, b) => {
+            if (sort === "asc") {
+                return a.price - b.price;
+            } else if (sort === "desc") {
+                return b.price - a.price;
+            } else {
+                return a.price + b.price;
+            }
+        })
     return (
         <div>
             <Navbar />
-            <h1 className="text-3xl font-bold text-center my-2 p-4 bg-blue-400 text-white">Men's Products</h1>
+            <h1 className="text-3xl font-bold text-center my-2 p-1 bg-blue-400 text-white">Men's Products</h1>
+            <div className='flex p-2 my-2 bg-blue-300'>
+                <div className='flex w-full p-1 '>
+                    <input className='font-normal border-2 bg-slate-200 border-black rounded-lg px-2 h-8 w-full sm:w-full lg:w-1/3'
+                        type='text'
+                        placeholder='Search Your Products here...'
+                        value={search}
+                        onChange={handleSearch}>
+                    </input>
+                </div>
+                <div className='flex justify-end rounded-lg bg-slate-300'>
+                    <select className='border-2 my-1 rounded-lg bg-slate-200'
+                        value={sort}
+                        onChange={handleSort}>
+                        <option value="asc" > Sort by price: Low to High</option>
+                        <option value="desc" > Sort by price: High to Low</option>
+                        <option value="all"> Select all</option>
+                    </select>
+                </div>
+            </div>
             <div>
-                <h1 className="text-center bg-blue-400 text-white p-3 font-bold text-3xl mt-2">Products</h1>
                 {loading ? (
                     <div className="text-center">
                         <div role="status">
@@ -67,20 +104,19 @@ const MensClothing = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="py-3 grid lg:grid-cols-4 gap-4 sm:grid-cols-2 md:grid-cols-2 grid-cols-1 xl-grid-cols-4 2xl:grid-cols-5 shadow-xl ">
-                        {products.map(product => (
+                    <div className="py-3 grid lg:grid-cols-5 gap-4 sm:grid-cols-4 md:grid-cols-3 grid-cols-2 xl-grid-cols-6 2xl:grid-cols-3 shadow-xl">
+                        {filterProducts.map(product => (
                             <div key={product.id} className="border p-4 rounded-lg shadow-lg">
                                 <img
                                     src={product.image}
                                     alt={product.title}
-                                    className="w-full  h-80 border-2 mb-4 rounded-md " />
+                                    className="w-52 h-48 border-2 mb-4 rounded-md " />
                                 <h2 className="font-semibold text-lg line-clamp-1">{product.title}</h2>
-                                <p className="text-sm py-2 line-clamp-2">{product.description.substring(0, 60)}...</p>
+                                <p className="text-sm py-2 line-clamp-2">{product.description.substring(0, 20)}...</p>
                                 <div className='flex justify-between mt-2 items-center'>
                                     <p className="font-bold text-sm">${product.price}</p>
-                                    <button className='bg-blue-200 hover:bg-blue-50 p-2 rounded-lg font-bold' onClick={() => handleCart(product.id, product.title, product.price)}>Add to cart</button>
+                                    <button className='bg-blue-200 hover:bg-blue-50 p-1 rounded-lg font-bold' onClick={() => handleCart(product.id, product.title, product.price)}>Add to cart</button>
                                 </div>
-
                             </div>
                         ))}
                     </div>

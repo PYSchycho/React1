@@ -11,7 +11,7 @@ const PaymentsSuccess = () => {
   }, [navigate])
   return (
     <div>
-      <img className='h-screen w-screen items-center' src='https://education.uoc.ac.in/images/ezgif.com-crop.gif' alt='Loading' /> 
+      <img className='h-screen w-screen items-center' src='https://education.uoc.ac.in/images/ezgif.com-crop.gif' alt='Loading..' /> 
     </div>
   );
 }
